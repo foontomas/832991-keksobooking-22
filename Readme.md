@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Денис Попов](https://up.htmlacademy.ru/javascript/22/user/832991).
-* Наставник: `Неизвестно`.
+* Наставник: [Дмитрий Гуляев](https://htmlacademy.ru/profile/dima).
 
 ---
 
