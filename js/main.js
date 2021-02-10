@@ -4,6 +4,7 @@ const intRangeReturn = function(firstNumber, secondNumber) {
   //Проверяем, что вводимые аргументы больше или равны нулю.
   if (firstNumber < 0 || secondNumber < 0) {
     //console.log('Внимание! Данная функция не предназначена для работы с отрицательными диапазонами. Введите положительные значения аргументов');
+    throw new Error('Внимание! Данная функция не предназначена для работы с отрицательными диапазонами. Введите положительные значения аргументов');
   }
 
   else {
@@ -50,6 +51,7 @@ const floatRangeReturn = function(firstNumber, secondNumber, decimalPlaces) {
   //Проверяем, что вводимые аргументы больше или равны нулю.
   if (firstNumber < 0 || secondNumber < 0) {
     //console.log('Внимание! Данная функция не предназначена для работы с отрицательными диапазонами. Введите положительные значения аргументов');
+    throw new Error('Внимание! Данная функция не предназначена для работы с отрицательными диапазонами. Введите положительные значения аргументов');
   }
 
   else {
@@ -87,6 +89,7 @@ const floatRangeReturn = function(firstNumber, secondNumber, decimalPlaces) {
 
     //Возвращаем результат
     return ~~(fullNumber * numberConverter) / numberConverter;
+    throw new Error('Input data error');
   }
 }
 floatRangeReturn(0.1, 20.999, 4);
