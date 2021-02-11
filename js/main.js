@@ -1,7 +1,8 @@
+'use strict';
 //Функция, возвращающая случайное целое число из диапазона от-до.
-const intRangeReturn = function(firstNumber, secondNumber) {
+var intRangeReturn = (firstNumber, secondNumber) => {
 
-  //Проверяем, что вводимые аргументы больше или равны нулю.
+  //Проверяем, что вводимые аргументы больше нуля.
   if (firstNumber < 0 || secondNumber < 0) {
     //console.log('Внимание! Данная функция не предназначена для работы с отрицательными диапазонами. Введите положительные значения аргументов');
     throw new Error('Внимание! Данная функция не предназначена для работы с отрицательными диапазонами. Введите положительные значения аргументов');
@@ -46,9 +47,9 @@ intRangeReturn(0.1, 20.999);
 
 
 //Функция, возвращающая случайное число из диапазона от-до, с указанием количества знаков после запятой
-const floatRangeReturn = function(firstNumber, secondNumber, decimalPlaces) {
+const floatRangeReturn = (firstNumber, secondNumber, decimalPlaces) => {
 
-  //Проверяем, что вводимые аргументы больше или равны нулю.
+  //Проверяем, что вводимые аргументы больше нуля.
   if (firstNumber < 0 || secondNumber < 0) {
     //console.log('Внимание! Данная функция не предназначена для работы с отрицательными диапазонами. Введите положительные значения аргументов');
     throw new Error('Внимание! Данная функция не предназначена для работы с отрицательными диапазонами. Введите положительные значения аргументов');
@@ -89,9 +90,43 @@ const floatRangeReturn = function(firstNumber, secondNumber, decimalPlaces) {
 
     //Возвращаем результат
     return ~~(fullNumber * numberConverter) / numberConverter;
-    throw new Error('Input data error');
   }
 }
 floatRangeReturn(0.1, 20.999, 4);
 
 //console.log('Возвращаемое случайное число: ' + floatRangeReturn(0.1, 20.999, 4) + '.');
+
+//Описываем массивы значений
+
+const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+
+const getRandomFeatures = (FEATURES) => {
+  //случайное число для определения длины нового массива
+  const randomIndex = intRangeReturn(0, FEATURES.length-1);
+  //создаю новый массив значений
+  featuresArray = new Array(randomIndex).fill(null);
+  //Заполняю массив случайными значениями из массива FEATURES
+  for (var i = 0; i <= featuresArray.length-1; i++) {
+    let featuresArrayitem = intRangeReturn(0, FEATURES.length-1);
+    featuresArray[i] = FEATURES[featuresArrayitem];
+  }
+  return (featuresArray);
+}
+
+console.log (getRandomFeatures(FEATURES));
+
+const AUTHOR = {
+  avatar: 'img/avatars/user0' + intRangeReturn(1, 8) + '.png',
+
+};
+
+const OFFER = {
+  address: 'location.x, locaton.y',
+  price: intRangeReturn(1, Infinity),
+  type: ['palace', 'flat', 'house', 'bungalow'],
+  rooms: intRangeReturn(1, Infinity),
+  guests: intRangeReturn(1, Infinity),
+  checkin: ['12:00', '13:00', '14:00'],
+  checkout: ['12:00', '13:00', '14:00'],
+  features:
+}
