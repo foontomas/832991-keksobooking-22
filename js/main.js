@@ -56,13 +56,13 @@ const floatRangeReturn = (firstNumber, secondNumber, decimalPlaces) => {
     }
 
     //разность между первым и вторым аргументами берём по модулю (убираем разницу в порядке ввода аргументов)
-    let diff = Math.abs(firstNumber - secondNumber);
+    const diff = Math.abs(firstNumber - secondNumber);
 
     //Генерируем случайное число, округляем до большего и умножаем на разность между первым и вторым аргументом,
-    let fullNumber = Math.random() * (diff) + minValue;
+    const fullNumber = Math.random() * (diff) + minValue;
 
     //Считаем вспомогательную переменную для указания нужного кол-ва знаков после запятой
-    let numberConverter = Math.pow(10, decimalPlaces);
+    const numberConverter = Math.pow(10, decimalPlaces);
 
     //Возвращаем результат
     return ~~(fullNumber * numberConverter) / numberConverter;
@@ -104,15 +104,19 @@ const getRandomFeatures = (FEATURES) => {
       featuresArray.push(FEATURES[featuresArrayitem]);
     }
   }
-  return (featuresArray+'');
+  return (featuresArray);
 }
 
 //создаём элемент по заданию
 const createElement = () => {
-
-  const locationCountX = floatRangeReturn(35.65000, 35.70000, 5);
-  const LocationCountY = floatRangeReturn(139.70000, 139.80000, 5);
-  const fullAddress = locationCountX + ', ' + LocationCountY;
+  const rangeFromX = 35.65000;
+  const rangeToX = 35.70000;
+  const rangeFromY = 139.70000;
+  const rangetoY = 139.80000;
+  const afterComma = 5;
+  const locationCountX = floatRangeReturn(rangeFromX, rangeToX, afterComma);
+  const locationCountY = floatRangeReturn(rangeFromY, rangetoY, afterComma);
+  const fullAddress = locationCountX + ', ' + locationCountY;
 
   //создание объекта происходит в выводе функции
   return {
@@ -136,7 +140,7 @@ const createElement = () => {
 
     location: {
       locationCountX,
-      LocationCountY,
+      locationCountY,
     },
   };
 }
@@ -147,5 +151,5 @@ const OBJECT_COUNT = 10;
 const dataObjects = new Array(OBJECT_COUNT).fill(null).map(() => createElement());
 
 dataObjects;
-//console.log(dataObjects);
+console.log(dataObjects);
 
