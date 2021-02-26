@@ -23,7 +23,7 @@ const intRangeRandomize = (firstNumber, secondNumber) => {
     }
 
     //разность между первым и вторым аргументами берём по модулю (убираем разницу в порядке ввода аргументов)
-    let diff = Math.abs(firstNumber - secondNumber);
+    const diff = Math.abs(firstNumber - secondNumber);
 
     //Генерируем случайное число, округляем до большего и умножаем на разность между первым и вторым аргументом,
     return Math.floor(Math.random() * (diff + 1)) + minValue;
