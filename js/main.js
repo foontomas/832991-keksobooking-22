@@ -7,5 +7,4 @@ const OBJECT_COUNT = 10;
 const dataObjects = new Array(OBJECT_COUNT).fill(null).map(() => createElement());
 
 dataObjects;
-console.log(dataObjects);
 

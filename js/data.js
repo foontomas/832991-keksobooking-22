@@ -50,9 +50,6 @@ const getRandomFeatures = (FEATURES) => {
   return (featuresArray);
 }
 
-console.log(getRandomFeatures(FEATURES));
-
-
 //создаём элемент по заданию
 const createElement = () => {
 
