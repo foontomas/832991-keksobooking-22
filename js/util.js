@@ -1,5 +1,5 @@
 //Функция, возвращающая случайное целое число из диапазона от-до.
-const intRangeReturn = (firstNumber, secondNumber) => {
+const intRangeRandomize = (firstNumber, secondNumber) => {
 
   //Проверяем, что вводимые аргументы больше нуля.
   if (firstNumber < 0 || secondNumber < 0) {
@@ -32,7 +32,7 @@ const intRangeReturn = (firstNumber, secondNumber) => {
 
 
 //Функция, возвращающая случайное число из диапазона от-до, с указанием количества знаков после запятой
-const floatRangeReturn = (firstNumber, secondNumber, decimalPlaces) => {
+const floatRangeRandomize = (firstNumber, secondNumber, decimalPlaces) => {
 
   //Проверяем, что вводимые аргументы больше нуля.
   if (firstNumber < 0 || secondNumber < 0) {
@@ -68,6 +68,6 @@ const floatRangeReturn = (firstNumber, secondNumber, decimalPlaces) => {
 }
 
 export {
-  intRangeReturn,
-  floatRangeReturn
+  intRangeRandomize,
+  floatRangeRandomize
 };
