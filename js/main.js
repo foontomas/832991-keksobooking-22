@@ -1,7 +1,6 @@
 
-import {dataObjects} from './data.js';
-
-dataObjects;
+import './data.js';
+import './generation.js';
 
 //Заполняем массив при помощи функции генерации элементов
 /*const OBJECT_COUNT = 10;
