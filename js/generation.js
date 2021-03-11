@@ -56,5 +56,5 @@ const makeCardsArray = (generateCards) => {
   return outputCards;
 };
 
-const cardsArray = makeCardsArray(generateCards);
-document.querySelector('#map-canvas').appendChild(cardsArray[0]);
+//Выводим в #map-canvas первый элемент сгенерированного массива карточек
+document.querySelector('#map-canvas').appendChild((makeCardsArray(generateCards))[0]);
