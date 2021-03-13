@@ -84,6 +84,14 @@ const createElement = () => {
   };
 }
 
+//Заполняем массив при помощи функции генерации элементов
+const OBJECT_COUNT = 10;
+
+const dataObjects = new Array(OBJECT_COUNT).fill(null).map(() => createElement());
+
+dataObjects;
+
 export {
-  createElement
+  dataObjects,
+  offerTypes
 };
