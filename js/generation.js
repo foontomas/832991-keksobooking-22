@@ -1,4 +1,3 @@
-import {dataObjects} from './data.js';
 
 const offerValues = {
   'palace': 'Дворец',
@@ -6,8 +5,6 @@ const offerValues = {
   'house': 'Дом',
   'bungalow': 'Бунгало',
 };
-
-const outputCards = [];
 
 //Находим шаблон #card, в шаблоне находим класс .popup
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
