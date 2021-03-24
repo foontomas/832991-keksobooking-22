@@ -17,7 +17,7 @@ const textInputChecking = (element, minInputLength, maxInputLength) => {
   });
 }
 
-//Функция для проверки вводимого числового значения в инпут
+//Функция для проверки вводимого числового значения в инпут "Цена за ночь", установка ценового минимума для каждого типа жилья, общий максимум.
 const numberValueChecking = (element, houseType, minimalNightPrice, maxInputValue) => {
   element.addEventListener('input', () => {
     const numberValue = element.value;
@@ -37,6 +37,31 @@ const numberValueChecking = (element, houseType, minimalNightPrice, maxInputValu
   });
 }
 
+//Функция для отключения полей с недопустимым количеством гостей для выбранного количества комнат
+const roomsCapacityControl = (roomNumber, guestsNumber) => {
 
+  roomNumber.addEventListener('change', (evt) => {
+    const selectedValue = evt.target.value;
+    const units = guestsNumber.children;
 
-export {textInputChecking, numberValueChecking};
+    if (selectedValue == 100) {
+      for (let i = 0; i < units.length; i++) {
+        units[i].disabled = true;
+      }
+      units[units.length - 1].disabled = false;
+      units[units.length - 1].selected = true;
+    } else {
+      for (let i = 0; i < units.length - 1; i++) {
+        if (units[i].value <= selectedValue) {
+          units[i].disabled = false;
+        } else {
+          units[i].disabled = true;
+        }
+      }
+      units[units.length - 1].disabled = true;
+      units[units[selectedValue].value].selected = true;
+    }
+  });
+}
+
+export {textInputChecking, numberValueChecking, roomsCapacityControl};

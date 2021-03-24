@@ -1,4 +1,4 @@
-import {textInputChecking, numberValueChecking} from './validation.js';
+import {textInputChecking, numberValueChecking, roomsCapacityControl} from './validation.js';
 //Значения берём из ТЗ
 const minimalNightPrice = {
   bungalow: 0,
@@ -14,6 +14,8 @@ const checkoutTime = document.querySelector('#timeout');
 const adForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
 const titleElement = document.querySelector('#title');
+const roomNumber = document.querySelector('#room_number');
+const guestsNumber = document.querySelector('#capacity');
 const minInputLength = 30; //минимальная длина строки для валидации заголовка формы объявления
 const maxInputLength = 100; //максимальная длина строки для валидации заголовка формы объявления
 const maxInputValue = 1000000; //максимальная стоимость жилья для валидации
@@ -55,10 +57,13 @@ const formProcessing = () => {
   });
 };
 
+//отключаем поля с недопустимым количеством гостей для выбранного количества комнат
+roomsCapacityControl(roomNumber, guestsNumber);
 
 //валидация поля заголовка
 textInputChecking(titleElement, minInputLength, maxInputLength);
 
+//Проверяем значение поля "Цена за ночь", установка ценового минимума для каждого типа жилья, общий максимум
 numberValueChecking(nightPrice, houseType, minimalNightPrice, maxInputValue)
 
 export {
