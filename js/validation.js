@@ -19,6 +19,7 @@ const textInputChecking = (element, minInputLength, maxInputLength) => {
 
 //Функция для проверки вводимого числового значения в инпут "Цена за ночь", установка ценового минимума для каждого типа жилья, общий максимум.
 const numberValueChecking = (element, houseType, minimalNightPrice, maxInputValue) => {
+
   element.addEventListener('input', () => {
     const numberValue = element.value;
     const type = houseType.value;
@@ -40,11 +41,10 @@ const numberValueChecking = (element, houseType, minimalNightPrice, maxInputValu
 //Функция для отключения полей с недопустимым количеством гостей для выбранного количества комнат
 const roomsCapacityControl = (roomNumber, guestsNumber) => {
 
-  roomNumber.addEventListener('change', (evt) => {
-    const selectedValue = evt.target.value;
-    const units = guestsNumber.children;
-
-    if (selectedValue == 100) {
+  //Утилитарная функция для приведения в соответствие числа комнат количеству гостей
+  const utilControl = (optionValue, units) => {
+    const optionMaxValue = 100; //Максимальное значение количества комнат из опций элемента <select>
+    if (optionValue == optionMaxValue) {
       for (let i = 0; i < units.length; i++) {
         units[i].disabled = true;
       }
@@ -52,15 +52,29 @@ const roomsCapacityControl = (roomNumber, guestsNumber) => {
       units[units.length - 1].selected = true;
     } else {
       for (let i = 0; i < units.length - 1; i++) {
-        if (units[i].value <= selectedValue) {
+        if (units[i].value <= optionValue) {
           units[i].disabled = false;
         } else {
           units[i].disabled = true;
         }
       }
       units[units.length - 1].disabled = true;
-      units[units[selectedValue].value].selected = true;
+      units[units[optionValue].value].selected = true;
     }
+  }
+
+  //Смотрим на значение числа комнат при загрузке страницы
+  document.addEventListener('DOMContentLoaded', () => {
+    const defaultValue = roomNumber.value;
+    const units = guestsNumber.children;
+    utilControl(defaultValue, units);
+  });
+
+  //Смотрим на значение числа комнат при выборе значения через <select>
+  roomNumber.addEventListener('change', (evt) => {
+    const selectedValue = evt.target.value;
+    const units = guestsNumber.children;
+    utilControl(selectedValue, units);
   });
 }
 

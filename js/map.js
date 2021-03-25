@@ -5,10 +5,10 @@ import {addMapBalloon} from './generation.js';
 
 const adForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
-const mainLat = 35.6851793;
-const mainLng = 139.7506108;
+const MAIN_LAT = 35.6851793;
+const MAIN_LNG = 139.7506108;
 const addressInput = document.querySelector('#address');
-addressInput.value = `${mainLat}, ${mainLng}`;
+addressInput.value = `${MAIN_LAT}, ${MAIN_LNG}`;
 
 formInactivation();
 
@@ -32,8 +32,8 @@ const map = L.map('map-canvas')
   })
 
   .setView({
-    lat: mainLat,
-    lng: mainLng,
+    lat: MAIN_LAT,
+    lng: MAIN_LNG,
   }, 10);
 
 L.tileLayer(
@@ -51,8 +51,8 @@ const mainMarkerIcon = L.icon({
 
 const mainMarker = L.marker(
   {
-    lat: mainLat,
-    lng: mainLng,
+    lat: MAIN_LAT,
+    lng: MAIN_LNG,
   }, {
     draggable: true,
     icon: mainMarkerIcon,
