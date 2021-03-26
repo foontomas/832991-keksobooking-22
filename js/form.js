@@ -64,7 +64,8 @@ roomsCapacityControl(roomNumber, guestsNumber);
 textInputChecking(titleElement, MIN_INPUT_LENGTH, MAX_INPUT_LENGTH);
 
 //Проверяем значение поля "Цена за ночь", установка ценового минимума для каждого типа жилья, общий максимум
-numberValueChecking(nightPrice, houseType, minimalNightPrice, MAX_INPUT_VALUE)
+numberValueChecking(nightPrice, houseType, minimalNightPrice, MAX_INPUT_VALUE);
+
 
 export {
   formInactivation, formProcessing

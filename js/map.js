@@ -1,12 +1,13 @@
 /* global L:readonly */
 import {formInactivation} from './form.js';
-import {dataObjects} from './data.js';
+//import {dataObjects} from './data.js';
 import {addMapBalloon} from './generation.js';
-
+import {getData} from './remote.js';
 const adForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
 const MAIN_LAT = 35.6851793;
 const MAIN_LNG = 139.7506108;
+const OBJECT_COUNT = 10;
 const addressInput = document.querySelector('#address');
 addressInput.value = `${MAIN_LAT}, ${MAIN_LNG}`;
 
@@ -66,29 +67,40 @@ mainMarker.on('moveend', (evt) => {
   addressInput.value = `${coords.lat.toFixed(5)}, ${coords.lng.toFixed(5)}`;
 });
 
-const points = dataObjects;
+//const points = dataObjects;
 
-points.forEach(({location, author, offer}) => {
-  const icon = L.icon({
-    iconUrl: 'img/pin.svg',
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-  });
+//Функция для добавления меток на карту, на основании массива points
+const addMarkersOnMap = (points) => {
+  points.forEach(({location, author, offer}) => {
+    const icon = L.icon({
+      iconUrl: 'img/pin.svg',
+      iconSize: [40, 40],
+      iconAnchor: [20, 40],
+    });
 
-  const marker = L.marker(
-    {
-      lat: location.locationCountX,
-      lng: location.locationCountY,
-    },
-    {
-      icon,
-    },
-  );
-
-  marker
-    .addTo(map)
-
-    .bindPopup(
-      addMapBalloon({author, offer}),
+    const marker = L.marker(
+      {
+        lat: location.lat,
+        lng: location.lng,
+      },
+      {
+        icon,
+      },
     );
+
+
+    marker
+      .addTo(map)
+
+      //Прикрутили к меткам баллуны
+      .bindPopup(
+        addMapBalloon({author, offer}),
+      );
+  });
+}
+
+//Вызвали функцию для получения данных с удалённого сервера и вывели на карту метки
+getData((points) => {
+  addMarkersOnMap(points.slice(0, OBJECT_COUNT));
 });
+
