@@ -1,3 +1,4 @@
+import {textInputChecking, numberValueChecking, roomsCapacityControl} from './validation.js';
 //Значения берём из ТЗ
 const minimalNightPrice = {
   bungalow: 0,
@@ -12,6 +13,12 @@ const checkinTime = document.querySelector('#timein');
 const checkoutTime = document.querySelector('#timeout');
 const adForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
+const titleElement = document.querySelector('#title');
+const roomNumber = document.querySelector('#room_number');
+const guestsNumber = document.querySelector('#capacity');
+const MIN_INPUT_LENGTH = 30; //минимальная длина строки для валидации заголовка формы объявления
+const MAX_INPUT_LENGTH = 100; //максимальная длина строки для валидации заголовка формы объявления
+const MAX_INPUT_VALUE = 1000000; //максимальная стоимость жилья для валидации
 
 //Функция для инактивации формы по заданию  module6-task1
 const formInactivation = () => {
@@ -34,7 +41,7 @@ const formProcessing = () => {
 
   // меняем атрибуты минимального значения и плейсхолдера поля «Цена за ночь» при выборе типа жилья.
   houseType.addEventListener('change', (evt) => {
-    let val = evt.target.value;
+    const val = evt.target.value;
     nightPrice.min = nightPrice.placeholder = minimalNightPrice[val];
   });
 
@@ -49,6 +56,15 @@ const formProcessing = () => {
     checkinTime.value = checkoutValue;
   });
 };
+
+//отключаем поля с недопустимым количеством гостей для выбранного количества комнат
+roomsCapacityControl(roomNumber, guestsNumber);
+
+//валидация поля заголовка
+textInputChecking(titleElement, MIN_INPUT_LENGTH, MAX_INPUT_LENGTH);
+
+//Проверяем значение поля "Цена за ночь", установка ценового минимума для каждого типа жилья, общий максимум
+numberValueChecking(nightPrice, houseType, minimalNightPrice, MAX_INPUT_VALUE)
 
 export {
   formInactivation, formProcessing

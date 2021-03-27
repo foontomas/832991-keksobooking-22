@@ -17,15 +17,15 @@ const descriptionsArray = ['mysterious palace with ghosts and chains clatter', '
 
 const photoLinks = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 
-const rangeFromX = 35.65000; //x, число с плавающей точкой — широта, для диапазона случайных значений от 35.65000
+const RANGE_FROM_X = 35.65000; //x, число с плавающей точкой — широта, для диапазона случайных значений от 35.65000
 
-const rangeToX = 35.70000; //x, число с плавающей точкой — широта, для диапазона случайных значений до 35.70000
+const RANGE_TO_X = 35.70000; //x, число с плавающей точкой — широта, для диапазона случайных значений до 35.70000
 
-const rangeFromY = 139.70000; //y, число с плавающей точкой — долгота, для диапазона случайных значений от 139.70000
+const RANGE_FROM_Y = 139.70000; //y, число с плавающей точкой — долгота, для диапазона случайных значений от 139.70000
 
-const rangetoY = 139.80000; //y, число с плавающей точкой — долгота, для диапазона случайных значений до 139.80000
+const RANGE_TO_Y = 139.80000; //y, число с плавающей точкой — долгота, для диапазона случайных значений до 139.80000
 
-const afterComma = 5; //количество знаков посе запятой, в соответствии с заданием
+const AFTER_COMMA = 5; //количество знаков посе запятой, в соответствии с заданием
 
 
 //Функция для генерации массива случайной длинны.
@@ -53,8 +53,8 @@ const getRandomFeatures = (FEATURES) => {
 //создаём элемент по заданию
 const createElement = () => {
 
-  const locationCountX = floatRangeRandomize(rangeFromX, rangeToX, afterComma);
-  const locationCountY = floatRangeRandomize(rangeFromY, rangetoY, afterComma);
+  const locationCountX = floatRangeRandomize(RANGE_FROM_X, RANGE_TO_X, AFTER_COMMA);
+  const locationCountY = floatRangeRandomize(RANGE_FROM_Y, RANGE_TO_Y, AFTER_COMMA);
   const fullAddress = `${locationCountX}, ${locationCountY}`;
 
   //создание объекта происходит в выводе функции
