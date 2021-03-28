@@ -1,5 +1,5 @@
 /* global L:readonly */
-import {formInactivation} from './form.js';
+//import {formInactivation} from './form.js';
 //import {dataObjects} from './data.js';
 import {addMapBalloon} from './generation.js';
 import {getData} from './remote.js';
@@ -11,7 +11,7 @@ const OBJECT_COUNT = 10;
 const addressInput = document.querySelector('#address');
 addressInput.value = `${MAIN_LAT}, ${MAIN_LNG}`;
 
-formInactivation();
+//formInactivation();
 
 const map = L.map('map-canvas')
   .on('load', () => {
@@ -102,5 +102,103 @@ const addMarkersOnMap = (points) => {
 //Вызвали функцию для получения данных с удалённого сервера и вывели на карту метки
 getData((points) => {
   addMarkersOnMap(points.slice(0, OBJECT_COUNT));
+});
+
+const resetMap = () => {
+  addressInput.value = `${MAIN_LAT}, ${MAIN_LNG}`;
+  map.setView(L.latLng(MAIN_LAT, MAIN_LNG));
+  mainMarker.setLatLng(L.latLng(MAIN_LAT, MAIN_LNG));
+};
+
+//Отправляем форму
+
+
+//const adForm = document.querySelector('.ad-form');
+const main = document.querySelector('main');
+//const mapFilters = document.querySelector('.map__filters');
+
+const isEscEvent = (evt) => {
+  return evt.key === ('Escape' || 'Esc');
+};
+
+const isEnterEvent = (evt) => {
+  return evt.key === 'Enter';
+};
+
+
+
+const onPopupHide = (evt) => {
+  const popup = main.querySelector('.success') || main.querySelector('.error');
+  if (isEscEvent(evt) || isEnterEvent(evt) || evt.type == 'click') {
+    evt.preventDefault();
+    popup.remove();
+  }
+};
+
+
+adForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  const formData = new FormData(evt.target);
+  const successMessageTemplate = document.querySelector('#success').content.querySelector('.success'); // содержимое шаблона #success
+  const errorMessageTemplate = document.querySelector('#error').content.querySelector('.error'); // содержимое шаблона #error
+
+
+
+
+  fetch(
+    'https://22.javascript.pages.academy/keksobooking',
+    {
+      method: 'POST',
+      body: formData,
+    },
+  )
+    .then((response) => {
+
+      if (response.ok) {
+
+        const messageSuccess = successMessageTemplate.cloneNode(true);
+        main.append(messageSuccess);
+        //тут чистим отправленную форму
+        document.addEventListener('keydown', onPopupHide);
+        messageSuccess.addEventListener('click', onPopupHide);
+
+        console.log(response.json());
+        return response.json();
+
+      } else {
+        const messageError = errorMessageTemplate.cloneNode(true);
+        const errorBtn = messageError.querySelector('.error__button');
+        errorBtn.focus();
+        main.append(messageError);
+        document.addEventListener('keydown', onPopupHide);
+        errorBtn.addEventListener('keydown', onPopupHide);
+        messageError.addEventListener('click', onPopupHide);
+        console.log (`${response.status} ${response.statusText}`);
+      }
+      console.log (`it's me ${response.status} ${response.statusText}`);
+      throw new Error(`${response.status} ${response.statusText}`);
+
+    })
+
+    //обновили форму
+    .then(() => {
+      adForm.reset();
+      mapFilters.reset();
+      resetMap();
+    })
+
+
+    .catch(() => {
+
+      /*const messageError = errorMessageTemplate.cloneNode(true);
+      const errorBtn = messageError.querySelector('.error__button');
+      errorBtn.focus();
+      main.append(messageError);
+      document.addEventListener('keydown', onPopupHide);
+      errorBtn.addEventListener('keydown', onPopupHide);
+      messageError.addEventListener('click', onPopupHide);*/
+
+    });
 });
 

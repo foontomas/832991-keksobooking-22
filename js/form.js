@@ -1,4 +1,5 @@
 import {textInputChecking, numberValueChecking, roomsCapacityControl} from './validation.js';
+
 //Значения берём из ТЗ
 const minimalNightPrice = {
   bungalow: 0,
@@ -57,6 +58,8 @@ const formProcessing = () => {
   });
 };
 
+formInactivation();
+
 //отключаем поля с недопустимым количеством гостей для выбранного количества комнат
 roomsCapacityControl(roomNumber, guestsNumber);
 
@@ -67,6 +70,14 @@ textInputChecking(titleElement, MIN_INPUT_LENGTH, MAX_INPUT_LENGTH);
 numberValueChecking(nightPrice, houseType, minimalNightPrice, MAX_INPUT_VALUE);
 
 
+
+
+
+
+//Отправляем форму
+
+
+
 export {
-  formInactivation, formProcessing
+  formProcessing
 };

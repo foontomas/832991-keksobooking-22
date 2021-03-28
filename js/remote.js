@@ -1,3 +1,5 @@
+
+
 const ERROR_TIMER = 10000;
 
 const inCaseOfError = (err) => {
@@ -36,5 +38,7 @@ const getData = (onSuccess) => {
       inCaseOfError(`Ошибка при загрузке данных (${err}). Чтобы увидеть объявления на карте, попробуйте обновить страницу`);
     });
 };
+
+
 
 export {getData};
