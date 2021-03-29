@@ -3,6 +3,7 @@
 //import {dataObjects} from './data.js';
 import {addMapBalloon} from './generation.js';
 import {getData} from './remote.js';
+import {onPopupHide} from './util.js';
 const adForm = document.querySelector('.ad-form');
 const mapFilters = document.querySelector('.map__filters');
 const MAIN_LAT = 35.6851793;
@@ -10,6 +11,7 @@ const MAIN_LNG = 139.7506108;
 const OBJECT_COUNT = 10;
 const addressInput = document.querySelector('#address');
 addressInput.value = `${MAIN_LAT}, ${MAIN_LNG}`;
+const resetFormButton = document.querySelector('.ad-form__reset');
 
 //formInactivation();
 
@@ -117,23 +119,7 @@ const resetMap = () => {
 const main = document.querySelector('main');
 //const mapFilters = document.querySelector('.map__filters');
 
-const isEscEvent = (evt) => {
-  return evt.key === ('Escape' || 'Esc');
-};
 
-const isEnterEvent = (evt) => {
-  return evt.key === 'Enter';
-};
-
-
-
-const onPopupHide = (evt) => {
-  const popup = main.querySelector('.success') || main.querySelector('.error');
-  if (isEscEvent(evt) || isEnterEvent(evt) || evt.type == 'click') {
-    evt.preventDefault();
-    popup.remove();
-  }
-};
 
 
 adForm.addEventListener('submit', (evt) => {
@@ -159,7 +145,9 @@ adForm.addEventListener('submit', (evt) => {
 
         const messageSuccess = successMessageTemplate.cloneNode(true);
         main.append(messageSuccess);
-        //тут чистим отправленную форму
+        adForm.reset();
+        mapFilters.reset();
+        resetMap();
         document.addEventListener('keydown', onPopupHide);
         messageSuccess.addEventListener('click', onPopupHide);
 
@@ -176,29 +164,18 @@ adForm.addEventListener('submit', (evt) => {
         messageError.addEventListener('click', onPopupHide);
         console.log (`${response.status} ${response.statusText}`);
       }
-      console.log (`it's me ${response.status} ${response.statusText}`);
-      throw new Error(`${response.status} ${response.statusText}`);
-
-    })
-
-    //обновили форму
-    .then(() => {
-      adForm.reset();
-      mapFilters.reset();
-      resetMap();
+      //console.log (`it's me ${response.status} ${response.statusText}`);
     })
 
 
     .catch(() => {
 
-      /*const messageError = errorMessageTemplate.cloneNode(true);
-      const errorBtn = messageError.querySelector('.error__button');
-      errorBtn.focus();
-      main.append(messageError);
-      document.addEventListener('keydown', onPopupHide);
-      errorBtn.addEventListener('keydown', onPopupHide);
-      messageError.addEventListener('click', onPopupHide);*/
-
     });
+});
+
+resetFormButton.addEventListener('click', () => {
+  adForm.reset();
+  mapFilters.reset();
+  resetMap();
 });
 

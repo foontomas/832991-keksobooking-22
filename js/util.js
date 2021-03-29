@@ -1,3 +1,5 @@
+const main = document.querySelector('main');
+
 //Функция, возвращающая случайное целое число из диапазона от-до.
 const intRangeRandomize = (firstNumber, secondNumber) => {
 
@@ -67,7 +69,24 @@ const floatRangeRandomize = (firstNumber, secondNumber, decimalPlaces) => {
   }
 }
 
+const isEscEvent = (evt) => {
+  return evt.key === ('Escape' || 'Esc');
+};
+
+const isEnterEvent = (evt) => {
+  return evt.key === 'Enter';
+};
+
+const onPopupHide = (evt) => {
+  const popup = main.querySelector('.success') || main.querySelector('.error');
+  if (isEscEvent(evt) || isEnterEvent(evt) || evt.type == 'click') {
+    evt.preventDefault();
+    popup.remove();
+  }
+};
+
 export {
   intRangeRandomize,
-  floatRangeRandomize
+  floatRangeRandomize,
+  onPopupHide
 };

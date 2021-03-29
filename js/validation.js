@@ -44,6 +44,7 @@ const roomsCapacityControl = (roomNumber, guestsNumber) => {
   //Утилитарная функция для приведения в соответствие числа комнат количеству гостей
   const utilControl = (optionValue, units) => {
     const optionMaxValue = 100; //Максимальное значение количества комнат из опций элемента <select>
+
     if (optionValue == optionMaxValue) {
       for (let i = 0; i < units.length; i++) {
         units[i].disabled = true;
