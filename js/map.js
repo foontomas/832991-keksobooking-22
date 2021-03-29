@@ -151,7 +151,6 @@ adForm.addEventListener('submit', (evt) => {
         document.addEventListener('keydown', onPopupHide);
         messageSuccess.addEventListener('click', onPopupHide);
 
-        console.log(response.json());
         return response.json();
 
       } else {
@@ -162,9 +161,7 @@ adForm.addEventListener('submit', (evt) => {
         document.addEventListener('keydown', onPopupHide);
         errorBtn.addEventListener('keydown', onPopupHide);
         messageError.addEventListener('click', onPopupHide);
-        console.log (`${response.status} ${response.statusText}`);
       }
-      //console.log (`it's me ${response.status} ${response.statusText}`);
     })
 
 
